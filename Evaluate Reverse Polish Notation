@@ -1,0 +1,16 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> str = new Stack<>();
+        for(String j : tokens){
+            if("+-*/".contains(j))  str.push(eval(str.pop(), str.pop(), j));
+            else    str.push(Integer.parseInt(j));
+        }
+        return str.pop();
+    }
+     private int eval(int b, int a, String op){
+            if("+".equals(op))  return a+b;
+            else if("-".equals(op)) return a-b;
+            else if("*".equals(op)) return a*b;
+            else    return a/b;
+        }
+}
