@@ -1,0 +1,26 @@
+class Solution {
+    private List<List<Integer>> res;
+    private LinkedList<Integer> track;
+    
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        res = new ArrayList<>();
+        track = new LinkedList<>();
+        backtrack(k, n, 1);
+        return res; 
+    }
+    private void backtrack(int k, int sum, int start){
+        if(sum == 0 && track.size() == k){
+            res.add(new LinkedList<>(track));
+            return;
+        }
+        if(track.size() > k) return;
+        for(int i = start; i < 10; i++){
+            if(sum < i) return;
+            sum -= i;
+            track.add(i);
+            backtrack(k, sum, i + 1);
+            track.removeLast();
+            sum += i;   
+        }
+    }
+}
